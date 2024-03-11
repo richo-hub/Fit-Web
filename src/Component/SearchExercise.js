@@ -3,9 +3,8 @@ import { Box, Button, Stack, TextField, Typography } from '@mui/material'
 import { exerciseOptions, fetchData } from '../Util/fetchData';
 import HorizontalScrollBar from './HorizontalScrollBar';
 
-const SearchExercise = () => {
+const SearchExercise = ({setExercises,bodyPart,setBodyPart}) => {
   const [search, setSearch] = useState(' ');
-  const [exercises, setExercises] = useState([]);
   const [bodyParts, setBodyParts] = useState([]);
 
   useEffect(() => {
@@ -43,15 +42,23 @@ const SearchExercise = () => {
       <Box position="relative" mb="72px">
         <TextField sx={{ input: {fontWeight:'700', border: 'none', borderRadius:'4px'}, width:{lg:'1170px', xs: '350px'}, 
         backgroundColor:'#fff', borderRadius:'40px'}} type='text' placeholder='search exercise' height="76px" 
-          value={search} onChange={(e) => setSearch(e.target.value.toLowerCase())}
+          value={search} 
+          onChange={(e) => setSearch(e.target.value.toLowerCase())}
         />
         <Button className='search-btn' sx={{
           bgcolor:"#ff2625", color:'#fff', position:'absolute', textTransform:'none', height:'56px', 
           width:{ lg:'175px', xs:'80px'}, fontSize:{ lg:'20px', xs: '14px' }, right:'0'
-        }} onClick={HandleSearch}>search</Button>
+        }} 
+          onClick={HandleSearch}>
+          search
+        </Button>
       </Box>
       <Box sx={{position:'relative', width:'100%', p:'20px'}}>
-        <HorizontalScrollBar data={bodyParts}/>
+        <HorizontalScrollBar 
+          data={bodyParts}
+          bodyPart={bodyPart}
+          setBodyPart={setBodyPart}
+        />
       </Box>
     </Stack>
   )
